@@ -4,11 +4,12 @@
 
 #ifndef KALIEDOSCOPE_EXPRAST_H
 #define KALIEDOSCOPE_EXPRAST_H
-
+#include "llvm/IR/Verifier.h"
 
 class ExprAST {
 public:
     virtual ~ ExprAST();
+    virtual llvm::Value* codegen();
 };
 
 

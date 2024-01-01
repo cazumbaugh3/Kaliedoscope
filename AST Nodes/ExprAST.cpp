@@ -5,3 +5,7 @@
 #include "ExprAST.h"
 
 ExprAST::~ExprAST() = default;
+
+llvm::Value *ExprAST::codegen() {
+    return nullptr;
+};
