@@ -4,6 +4,7 @@
 
 #include "parser.h"
 #include "lexer.h"
+#include "error.h"
 #include "./AST Nodes/NumberExprAST.h"
 #include "AST Nodes/VariableExprAST.h"
 #include "AST Nodes/CallExprAST.h"
@@ -15,16 +16,6 @@ std::map<char, int> binopPrecedence;
 
 int getNextTok() {
     return curTok = getTok();
-}
-
-std::unique_ptr<ExprAST> logError(const char* str) {
-    fprintf(stderr, "Error: %s\n", str);
-    return nullptr;
-}
-
-std::unique_ptr<PrototypeAST> logErrorP(const char* str) {
-    logError(str);
-    return nullptr;
 }
 
 std::unique_ptr<ExprAST> parseExpression();

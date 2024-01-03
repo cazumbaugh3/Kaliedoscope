@@ -15,8 +15,6 @@ extern int curTok;
 int getNextTok();
 extern std::map<char, int> binopPrecedence;
 
-std::unique_ptr<ExprAST> logError(const char* str);
-std::unique_ptr<PrototypeAST> logErrorP(const char* str);
 int getTokPrecedence();
 
 // Parsing
