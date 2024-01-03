@@ -12,6 +12,7 @@ std::string name;
 
 public:
     VariableExprAST(const std::string &name);
+    llvm::Value* codegen() override;
 };
 
 
