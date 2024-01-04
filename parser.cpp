@@ -45,6 +45,7 @@ std::unique_ptr<ExprAST> parseIdentifierExpr() {
     getNextTok(); // Eat identifier
 
     if (curTok != '(') {
+        // Simple variable reference
         return std::make_unique<VariableExprAST>(idName);
     }
 
@@ -54,8 +55,7 @@ std::unique_ptr<ExprAST> parseIdentifierExpr() {
         while (true) {
             if (auto arg = parseExpression()) {
                 args.push_back(std::move(arg));
-            }
-            else {
+            } else {
                 return nullptr;
             }
             if (curTok == ')') {
@@ -181,7 +181,7 @@ std::unique_ptr<PrototypeAST> parseExtern() {
 
 std::unique_ptr<FunctionAST> parseTopLevelExpr() {
     if (auto e = parseExpression()) {
-        // Make an anononymous prototype
+        // Make an anonymous prototype
         auto proto = std::make_unique<PrototypeAST>("__anon_expr", std::vector<std::string>());
         // Construct and return a function AST from the proto and the expression
         return std::make_unique<FunctionAST>(std::move(proto), std::move(e));
