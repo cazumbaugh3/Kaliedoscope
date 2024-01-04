@@ -14,6 +14,7 @@ std::unique_ptr<ExprAST> body;
 
 public:
     FunctionAST(std::unique_ptr<PrototypeAST> proto, std::unique_ptr<ExprAST> body);
+    llvm::Function* codegen() override;
 };
 
 

@@ -15,6 +15,7 @@ std::vector<std::string> args;
 public:
     PrototypeAST(const std::string &name, std::vector<std::string> args);
     const std::string &getName() const;
+    llvm::Function* codegen() override;
 };
 
 
