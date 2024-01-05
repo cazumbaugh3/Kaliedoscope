@@ -1,5 +1,6 @@
 #include <iostream>
-#include "parser.h"
+#include <map>
+#include "parser/parser.h"
 #include "llvm/ADT/APFloat.h"
 #include "llvm/ADT/STLExtras.h"
 #include "llvm/IR/BasicBlock.h"
@@ -64,7 +65,6 @@ void handleTopLevelExpression() {
         fprintf(stderr, "Parsed a top-level expression\n");
     } else {
         getNextTok();
-        fprintf(stderr, "Error occured: current token %s\n", identifierString.c_str());
     }
 }
 
