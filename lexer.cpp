@@ -28,7 +28,7 @@ int getTok() {
     if (isdigit(lastChar) || lastChar == '.') {
         std::string numStr;
         do {
-            numStr += lastChar;
+            numStr += std::to_string(lastChar);
             lastChar = getchar();
         } while (isdigit(lastChar) || lastChar == '.');
 
@@ -53,5 +53,5 @@ int getTok() {
 
     int thisChar = lastChar;
     lastChar = getchar();
-     return thisChar;
+    return thisChar;
 }
