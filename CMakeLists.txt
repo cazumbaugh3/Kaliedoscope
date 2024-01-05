@@ -25,10 +25,10 @@ llvm_map_components_to_libnames(llvm_libs support core irreader)
 # Link against LLVM libraries
 
 add_executable(kaliedoscope main.cpp
-        lexer.cpp
-        lexer.h
-        parser.cpp
-        parser.h
+        lexer/lexer.cpp
+        lexer/lexer.h
+        parser/parser.cpp
+        parser/parser.h
         "AST Nodes/ExprAST.cpp"
         "AST Nodes/ExprAST.h"
         "AST Nodes/NumberExprAST.cpp"
@@ -43,6 +43,10 @@ add_executable(kaliedoscope main.cpp
         "AST Nodes/PrototypeAST.h"
         "AST Nodes/FunctionAST.cpp"
         "AST Nodes/FunctionAST.h"
+        error.cpp
+        error.h
+        llvm_statics.h
+        lexer/token.h
 )
 
 target_link_libraries(kaliedoscope ${llvm_libs})
