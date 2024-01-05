@@ -2,23 +2,28 @@
 // Created by Chuck Zumbaugh on 12/30/23.
 //
 
+#include <iostream>
 #include "parser.h"
-#include "lexer.h"
-#include "error.h"
-#include "./AST Nodes/NumberExprAST.h"
-#include "AST Nodes/VariableExprAST.h"
-#include "AST Nodes/CallExprAST.h"
-#include "AST Nodes/BinaryExprAST.h"
-#include "AST Nodes/FunctionAST.h"
+#include "../lexer/lexer.h"
+#include "../error.h"
+#include "../AST Nodes/NumberExprAST.h"
+#include "../AST Nodes/VariableExprAST.h"
+#include "../AST Nodes/CallExprAST.h"
+#include "../AST Nodes/BinaryExprAST.h"
+#include "../AST Nodes/FunctionAST.h"
 
-int curTok;
 std::map<char, int> binopPrecedence;
 
-int getNextTok() {
-    return curTok = getTok();
+int getTokPrecedence() {
+    if (!isascii(curTok)) {
+        return -1;
+    }
+    int tokPrec = binopPrecedence[curTok];
+    if (tokPrec <= 0) {
+        return -1;
+    }
+    return tokPrec;
 }
-
-std::unique_ptr<ExprAST> parseExpression();
 
 std::unique_ptr<ExprAST> parseNumberExpr() {
     auto result = std::make_unique<NumberExprAST>(numVal);
@@ -85,17 +90,6 @@ std::unique_ptr<ExprAST> parsePrimary() {
     }
 }
 
-int getTokPrecedence() {
-    if (!isascii(curTok)) {
-        return -1;
-    }
-    int tokPrec = binopPrecedence[curTok];
-    if (tokPrec < 0) {
-        return -1;
-    }
-    return tokPrec;
-}
-
 std::unique_ptr<ExprAST> parseExpression() {
     auto lhs = parsePrimary();
     if (!lhs) {
@@ -107,7 +101,6 @@ std::unique_ptr<ExprAST> parseExpression() {
 std::unique_ptr<ExprAST> parseBinopRHS(int exprPrec, std::unique_ptr<ExprAST> lhs) {
     while (true) {
         int tokPrec = getTokPrecedence();
-
         if (tokPrec < exprPrec) {
             // LHS is a higher precedence, we are done
             return lhs;

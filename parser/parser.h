@@ -6,13 +6,11 @@
 #define KALIEDOSCOPE_PARSER_H
 #include <memory>
 #include <map>
-#include "./AST Nodes/ExprAST.h"
-#include "./AST Nodes/PrototypeAST.h"
-#include "lexer.h"
-#include "AST Nodes/FunctionAST.h"
+#include "../AST Nodes/ExprAST.h"
+#include "../AST Nodes/PrototypeAST.h"
+#include "../lexer/lexer.h"
+#include "../AST Nodes/FunctionAST.h"
 
-extern int curTok;
-int getNextTok();
 extern std::map<char, int> binopPrecedence;
 
 int getTokPrecedence();

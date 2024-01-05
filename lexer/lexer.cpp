@@ -3,6 +3,7 @@
 
 std::string identifierString;
 double numVal;
+int curTok;
 
 int getTok() {
     static int lastChar = ' ';
@@ -54,4 +55,9 @@ int getTok() {
     int thisChar = lastChar;
     lastChar = getchar();
     return thisChar;
+}
+
+int getNextTok() {
+    //std::cout << "Last token: " + std::to_string(curTok) << std::endl;
+    return curTok = getTok();
 }
