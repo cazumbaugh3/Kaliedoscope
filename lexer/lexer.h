@@ -9,6 +9,7 @@
 
 extern std::string identifierString;
 extern double numVal;
+
 extern int curTok;
 int getTok();
 int getNextTok();
