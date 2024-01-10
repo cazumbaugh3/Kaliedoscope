@@ -5,7 +5,7 @@
 #include <iostream>
 #include "parser.h"
 #include "../lexer/lexer.h"
-#include "../error.h"
+#include "../error/error.h"
 #include "../AST Nodes/NumberExprAST.h"
 #include "../AST Nodes/VariableExprAST.h"
 #include "../AST Nodes/CallExprAST.h"
