@@ -4,7 +4,7 @@
 
 #include "VariableExprAST.h"
 #include "../llvm_statics.h"
-#include "../error.h"
+#include "../error/error.h"
 #include <string>
 
 VariableExprAST::VariableExprAST(const std::string &name): name(name) {};

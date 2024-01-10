@@ -4,7 +4,7 @@
 
 #include "CallExprAST.h"
 #include "../llvm_statics.h"
-#include "../error.h"
+#include "../error/error.h"
 
 CallExprAST::CallExprAST(const std::string &callee, std::vector<std::unique_ptr<ExprAST>> args):
 callee(callee), args(std::move(args)) {};

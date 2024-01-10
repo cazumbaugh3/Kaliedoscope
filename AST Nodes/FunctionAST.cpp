@@ -4,7 +4,8 @@
 
 #include "FunctionAST.h"
 #include "../llvm_statics.h"
-#include "../error.h"
+#include "../error/error.h"
+#include "../LLVMPasses/passAndAnalysisManagers.h"
 
 FunctionAST::FunctionAST(std::unique_ptr<PrototypeAST> proto, std::unique_ptr<ExprAST> body):
 proto(std::move(proto)), body(std::move(body)) {};
@@ -44,6 +45,8 @@ llvm::Function* FunctionAST::codegen() {
         builder->CreateRet(retVal);
         // Validate the generated code, checking for consistency
         llvm::verifyFunction(*theFunction);
+
+        theFPM->run(*theFunction, *theFAM);
         // Return the completed, verified function
         return theFunction;
     }

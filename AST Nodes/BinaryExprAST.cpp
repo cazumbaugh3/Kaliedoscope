@@ -4,7 +4,7 @@
 
 #include "BinaryExprAST.h"
 #include "../llvm_statics.h"
-#include "../error.h"
+#include "../error/error.h"
 
 BinaryExprAST::BinaryExprAST(char op, std::unique_ptr<ExprAST> LHS, std::unique_ptr<ExprAST> RHS):
 op(op), LHS(std::move(LHS)), RHS(std::move(RHS)) {};
