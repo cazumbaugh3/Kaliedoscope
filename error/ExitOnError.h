@@ -4,5 +4,8 @@
 
 #ifndef KALIEDOSCOPE_EXITONERROR_H
 #define KALIEDOSCOPE_EXITONERROR_H
+#include "llvm/IR/Verifier.h"
+
+extern llvm::ExitOnError exitOnError;
 
 #endif //KALIEDOSCOPE_EXITONERROR_H
