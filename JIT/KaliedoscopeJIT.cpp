@@ -21,14 +21,16 @@ MainJD(this->ES->createBareJITDylib("<main>")) {
 }
 
 llvm::orc::KaleidoscopeJIT::~KaleidoscopeJIT() {
-    if (auto Err = ES->endSession())
+    if (auto Err = ES->endSession()) {
         ES->reportError(std::move(Err));
+    }
 }
 
 llvm::Expected<std::unique_ptr<llvm::orc::KaleidoscopeJIT>> llvm::orc::KaleidoscopeJIT::Create() {
 auto EPC = SelfExecutorProcessControl::Create();
-if (!EPC)
-return EPC.takeError();
+if (!EPC) {
+    return EPC.takeError();
+}
 
 auto ES = std::make_unique<ExecutionSession>(std::move(*EPC));
 
@@ -36,16 +38,18 @@ JITTargetMachineBuilder JTMB(
         ES->getExecutorProcessControl().getTargetTriple());
 
 auto DL = JTMB.getDefaultDataLayoutForTarget();
-if (!DL)
-return DL.takeError();
+if (!DL) {
+    return DL.takeError();
+}
 
 return std::make_unique<KaleidoscopeJIT>(std::move(ES), std::move(JTMB),
         std::move(*DL));
 }
 
 llvm::Error llvm::orc::KaleidoscopeJIT::addModule(ThreadSafeModule TSM, ResourceTrackerSP RT) {
-    if (!RT)
+    if (!RT) {
         RT = MainJD.getDefaultResourceTracker();
+    }
     return CompileLayer.add(RT, std::move(TSM));
 }
 
